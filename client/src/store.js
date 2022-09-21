@@ -1,9 +1,9 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// import PostReducer from "./PostSlice";
+import { configureStore } from "@reduxjs/toolkit";
+import pizzaReducer from "./pizzaSlice";
 
 
-// export default configureStore({
-//   reducer: {
-//     post: PostReducer,
-//   }
-// })
+export const store = configureStore({
+  reducer: {
+    pizza: pizzaReducer,
+  },
+});

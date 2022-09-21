@@ -34,7 +34,7 @@ function Post({dogName,description,image}) {
           component="img"
           height="20% "
           image={image}
-          alt="Paella dish"
+          
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">

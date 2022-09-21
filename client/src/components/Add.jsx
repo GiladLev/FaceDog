@@ -1,3 +1,6 @@
+import { useDispatch, useSelector } from "react-redux";
+import { addplus, addPosts } from "../pizzaSlice";
+
 import {
   Avatar,
   Button,
@@ -18,9 +21,7 @@ import {
 import { Box } from "@mui/system";
 import styled from "@emotion/styled";
 import axios from "axios";
-import { addPost } from "../PostSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { addPosts, addplus } from "../PostSlice";
+
 const StyledModal = styled(Modal)({
   display: "flex",
   alignitem: "center",
@@ -32,10 +33,33 @@ const UserBox = styled(Box)({
   gap: "10px",
   marginBottom: "20px",
 });
-export const Add = ({ addPost, setDogName, setDescription, setImage }) => {
+
+
+export const Add = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [action, setAction] = useState("");
-  const [error, setError] = useState(false);
+  const [dogName, setDogName] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+
+  
+  const addPost=()=>{
+    postRequest()
+    dispatch(addPosts({
+      action: dogName, 
+      description: description,
+      image: image
+    }))
+  }
+
+  const postRequest = () => {
+    const todo = { action: dogName, }
+    axios.post('/api/todos', todo)
+      .then((res) => {
+        res.data && setDogName("")
+      })
+
+  }
 
   return (
     <Box>
