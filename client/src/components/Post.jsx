@@ -12,7 +12,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-function Post() {
+function Post({dogName,description,image}) {
   return (
     <Box sx={{margin:5}}>
         <Card>
@@ -27,20 +27,18 @@ function Post() {
               <MoreVert />
             </IconButton>
           }
-          title="Shrimp and Chorizo Paella"
+          title={dogName}
           subheader="September 14, 2016"
-        />
+          />
         <CardMedia
           component="img"
           height="20% "
-          image="https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12133501/American-English-Coonhound-howling-in-a-field1.jpg"
+          image={image}
           alt="Paella dish"
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
+           {description}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

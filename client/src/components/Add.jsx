@@ -1,9 +1,26 @@
-import { Avatar, Button, Fab, Modal, Stack, TextField, Tooltip, Typography } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Fab,
+  Modal,
+  Stack,
+  TextField,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
-import { Add as AddIcon, Image, PersonAdd, VideoCameraBack } from "@mui/icons-material";
+import {
+  Add as AddIcon,
+  Image,
+  PersonAdd,
+  VideoCameraBack,
+} from "@mui/icons-material";
 import { Box } from "@mui/system";
 import styled from "@emotion/styled";
-
+import axios from "axios";
+import { addPost } from "../PostSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addPosts, addplus } from "../PostSlice";
 const StyledModal = styled(Modal)({
   display: "flex",
   alignitem: "center",
@@ -13,11 +30,13 @@ const UserBox = styled(Box)({
   display: "flex",
   alignitem: "center",
   gap: "10px",
-  marginBottom: "20px" 
-
+  marginBottom: "20px",
 });
-export const Add = () => {
+export const Add = ({ addPost, setDogName, setDescription, setImage }) => {
   const [open, setOpen] = useState(false);
+  const [action, setAction] = useState("");
+  const [error, setError] = useState(false);
+
   return (
     <Box>
       <Tooltip
@@ -53,19 +72,48 @@ export const Add = () => {
             </Typography>
           </UserBox>
           <TextField
-          sx={{width: "100%"}}
-          id="standard-multiline-static"
-          multiline
-          rows={3}
-          placeholder="Post new dog"
-          variant="standard"
-        />
-        <Stack direction="row" gap= {1} mt={2} mb={3}>
-            <Image color="error"/>
-            <VideoCameraBack color="success"/>
-            <PersonAdd color="primary"/>
-        </Stack>
-        <Button  fullWidth variant="contained" aria-label=" primary">Post</Button>
+            onChange={(e) => setDogName(e.target.value)}
+            sx={{ width: "100%" }}
+            id="standard-multiline-static"
+            multiline
+            rows={1}
+            placeholder="Dog name"
+            variant="standard"
+          />
+          <TextField
+            onChange={(e) => setDescription(e.target.value)}
+            sx={{ width: "100%" }}
+            id="standard-multiline-static"
+            multiline
+            rows={1}
+            placeholder="Describtion"
+            variant="standard"
+          />
+          <TextField
+            onChange={(e) => setImage(e.target.value)}
+            sx={{ width: "100%" }}
+            id="standard-multiline-static"
+            multiline
+            rows={1}
+            placeholder="src of image"
+            variant="standard"
+          />
+
+          <Stack direction="row" gap={1} mt={2} mb={3}>
+            <Image color="error" />
+            <VideoCameraBack color="success" />
+            <PersonAdd color="primary" />
+          </Stack>
+          <Button
+            onClick={() => {
+              addPost();
+            }}
+            fullWidth
+            variant="contained"
+            aria-label=" primary"
+          >
+            Post
+          </Button>
         </Box>
       </StyledModal>
     </Box>
