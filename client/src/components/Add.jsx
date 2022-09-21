@@ -21,6 +21,7 @@ import {
 import { Box } from "@mui/system";
 import styled from "@emotion/styled";
 import axios from "axios";
+import { useEffect } from "react";
 
 const StyledModal = styled(Modal)({
   display: "flex",
@@ -53,9 +54,11 @@ export const Add = () => {
   }
 
   const postRequest = () => {
+    console.log("hi here send post");
     const todo = { action: dogName, }
     axios.post('/api/todos', todo)
       .then((res) => {
+        console.log(res);
         res.data && setDogName("")
       })
 

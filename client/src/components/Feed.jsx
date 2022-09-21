@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { addPosts } from "../pizzaSlice";
+import Todo from "./Todo";
 
 export default function Feed() {
   const dispatch = useDispatch();
@@ -22,6 +23,18 @@ export default function Feed() {
       })
       .catch((err) => console.log(err))
   }
+
+  const deletePost = (id) => {
+    axios
+    .delete(`/api/todos/${id}`)
+    .then((res) => {
+        if (res.data) {
+          getpost();
+        }
+    })
+    .catch((err) => console.log(err));
+};
+
   useEffect(() => {
     // setPosts(pizza.posts);
     getpost()
@@ -33,11 +46,14 @@ export default function Feed() {
 
   return (
     <Box flex={4} p={2}>
+       <Todo/>
       <div>
         <h1>
           {posts?.map((p, index) => {
             return (
               <Post
+              id={p.id}
+              deletePost={deletePost}
                 key={index}
                 dogName={p.action}
                 description={p.description}

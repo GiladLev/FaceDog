@@ -12,7 +12,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-function Post({dogName,description,image}) {
+function Post({dogName,description,image, deleteTodo, id}) {
   return (
     <Box sx={{margin:5}}>
         <Card>
@@ -23,7 +23,7 @@ function Post({dogName,description,image}) {
             </Avatar>
           }
           action={
-            <IconButton aria-label="settings">
+            <IconButton aria-label="settings" onClick={() => deleteTodo(id)}>
               <MoreVert />
             </IconButton>
           }

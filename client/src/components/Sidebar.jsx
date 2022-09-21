@@ -17,12 +17,13 @@ import {
 import React from "react";
 
 export default function Sidebar() {
+  const [place, setPlace]=("Home")
   return (
     <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
       <Box position="fixed">
         <List>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#home">
+            <ListItemButton>
               <ListItemIcon>
                 <Home />
               </ListItemIcon>
@@ -33,7 +34,7 @@ export default function Sidebar() {
 
         <List>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#home">
+            <ListItemButton >
               <ListItemIcon>
                 <Groups />
               </ListItemIcon>
@@ -44,7 +45,7 @@ export default function Sidebar() {
 
         <List>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#home">
+            <ListItemButton >
               <ListItemIcon>
                 <MedicalServices />
               </ListItemIcon>
@@ -55,7 +56,7 @@ export default function Sidebar() {
 
         <List>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#home">
+            <ListItemButton>
               <ListItemIcon>
                 <Diversity1 />
               </ListItemIcon>
@@ -66,7 +67,7 @@ export default function Sidebar() {
 
         <List>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#home">
+            <ListItemButton >
               <ListItemIcon>
                 <ModeNight />
               </ListItemIcon>
