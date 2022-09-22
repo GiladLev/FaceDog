@@ -12,7 +12,8 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-function Post({dogName,description,image, deleteTodo, id}) {
+function Post({dogName ,description ,image, deleteTodo, id}) {
+  
   return (
     <Box sx={{margin:5}}>
         <Card>

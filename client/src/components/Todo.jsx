@@ -3,6 +3,7 @@ import axios from 'axios';
 import Input from './Input';
 import ListTodo from './ListTodo';
 const Todo = () => {
+
   const [todos, setTodos] = useState([])
   
   const getTodos = () => {
@@ -10,6 +11,7 @@ const Todo = () => {
       .get('/api/todos')
       .then((res) => {
           if (res.data) {
+            console.log(res.data);
               setTodos(res.data);
             }
         })
@@ -30,7 +32,6 @@ const Todo = () => {
   }, []);
       return (
           <div>
-        <h1>Create Post</h1>
         <Input getTodos={getTodos} />
         <ListTodo todos={todos} deleteTodo={deleteTodo} />
       </div>

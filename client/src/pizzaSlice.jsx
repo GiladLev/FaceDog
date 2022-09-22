@@ -15,7 +15,6 @@ export const pizzaSlice = createSlice({
     reducers:{
         addPosts: (state, action) => {
             state.posts = [...state.posts, action.payload];
-            console.log(current(state))
           },
    
 

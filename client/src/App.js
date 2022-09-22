@@ -22,7 +22,6 @@ const App = () => {
         <Feed />
         <Rightbar />
       </Stack>
-      <Add />
     </Box>
   );
 };

@@ -20,12 +20,7 @@ const StyledToolbar = styled(Toolbar)({
   justifyContent: "space-between",
 });
 
-const Search = styled("div")(({ theme }) => ({
-  backgroundColor: "white",
-  padding: "0 10px",
-  borderRadius: theme.shape.borderRadius,
-  width: "40%",
-}));
+
 const Icons = styled(Box)(({ theme }) => ({
   display: "none",
   gap: "20px",
@@ -53,16 +48,7 @@ export default function Navbar() {
           FACEDOG
         </Typography>
         <HomeLogo sx={{ display: { xs: "block", sm: "none" } }} />
-        <Search>
-          <InputBase placeholder="search" />
-        </Search>
         <Icons>
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-          <Badge badgeContent={1} color="error">
-            <Notifications />
-          </Badge>
           <Avatar
             sx={{ width: 30, height: 30 }}
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX2ojpmtX-a5djgBC3PGlyuHRm8Po0wgYAS_k2TEYE&s"
