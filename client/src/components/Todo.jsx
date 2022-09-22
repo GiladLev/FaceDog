@@ -30,7 +30,7 @@ const Todo = () => {
   }, []);
       return (
           <div>
-        <h1>My Todo(s)</h1>
+        <h1>Create Post</h1>
         <Input getTodos={getTodos} />
         <ListTodo todos={todos} deleteTodo={deleteTodo} />
       </div>
