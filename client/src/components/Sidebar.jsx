@@ -15,9 +15,10 @@ import {
   Switch,
 } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
-  const [place, setPlace]=("Home")
+  const [place, setPlace] = ("Home")
   return (
     <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
       <Box position="fixed">
@@ -27,7 +28,8 @@ export default function Sidebar() {
               <ListItemIcon>
                 <Home />
               </ListItemIcon>
-              <ListItemText primary="Homepage" />
+
+              <Link to={"/"} ><ListItemText primary="Homepage" /></Link>
             </ListItemButton>
           </ListItem>
         </List>
@@ -38,7 +40,7 @@ export default function Sidebar() {
               <ListItemIcon>
                 <Groups />
               </ListItemIcon>
-              <ListItemText primary="Groups" />
+              <Link to={"/groups"}><ListItemText primary="Groups" /></Link>
             </ListItemButton>
           </ListItem>
         </List>
@@ -49,7 +51,8 @@ export default function Sidebar() {
               <ListItemIcon>
                 <MedicalServices />
               </ListItemIcon>
-              <ListItemText primary="Service" />
+              <Link to={"/service"}><ListItemText primary="Service" /></Link>
+
             </ListItemButton>
           </ListItem>
         </List>
@@ -60,7 +63,8 @@ export default function Sidebar() {
               <ListItemIcon>
                 <Diversity1 />
               </ListItemIcon>
-              <ListItemText primary="Association" />
+              <Link to={"/association"}><ListItemText primary="Association" /></Link>
+
             </ListItemButton>
           </ListItem>
         </List>
