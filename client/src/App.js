@@ -1,33 +1,32 @@
-
-import { Box, Stack } from "@mui/system";
-import React, { useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import "./app.css";
-import { Add } from "./components/Add";
-import Association from "./components/Association";
-import Feed from "./components/Feed";
-import Groups from "./components/Groups";
-import Home from "./components/Home";
-import Navbar from "./components/Navbar";
-import Register from "./components/Register";
-import Rightbar from "./components/Rightbar";
-import Service from "./components/Service";
 import Sidebar from "./components/Sidebar";
-import Todo from "./components/Todo";
-const App = () => {
+import Feed from "./components/Feed";
+import Rightbar from "./components/Rightbar";
+import { Box, createTheme, Stack, ThemeProvider } from "@mui/material";
+import Navbar from "./components/Navbar";
+import Add from "./components/Add";
+import { useState } from "react";
 
+function App() {
+  const [mode, setMode] = useState("light");
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: mode,
+    },
+  });
   return (
-    <Box>
-
-
-      <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/groups" element={<Groups></Groups>}></Route>
-        <Route path="/service" element={<Service></Service>}></Route>
-        <Route path="/association" element={<Association></Association>}></Route>
-      </Routes>
-
-    </Box>
+    <ThemeProvider theme={darkTheme}>
+      <Box bgcolor={"background.default"} color={"text.primary"}>
+        <Navbar />
+        <Stack direction="row" spacing={2} justifyContent="space-between">
+        <Sidebar setMode={setMode} mode={mode}/>
+          <Feed />
+          <Rightbar />
+        </Stack>
+        <Add />
+      </Box>
+    </ThemeProvider>
   );
-};
+}
+
 export default App;
