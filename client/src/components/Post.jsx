@@ -10,7 +10,19 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-const Post = () => {
+import { useEffect, useState } from "react";
+import { publicRequest } from "../requestMethods";
+import {format} from "timeago.js"
+
+const Post = ({post}) => {
+
+  useEffect(() => {
+    const fetchUser = async() =>{
+      const res = await publicRequest.get(`users/${post.userId}`)
+      console.log(res.data);
+    }
+    fetchUser()
+  }, [post.userId])
   return (
     <Card sx={{ margin: 5 }}>
       <CardHeader
@@ -25,7 +37,7 @@ const Post = () => {
           </IconButton>
         }
         title="John Doe"
-        subheader="September 14, 2022"
+        subheader={format(post.createdAt)}
       />
       <CardMedia
         component="img"
@@ -35,9 +47,7 @@ const Post = () => {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          {post.desc}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -46,6 +56,9 @@ const Post = () => {
             icon={<FavoriteBorder />}
             checkedIcon={<Favorite sx={{ color: "red" }} />}
           />
+          <Typography>
+            {post.likes.length}
+          </Typography>
         </IconButton>
         <IconButton aria-label="share">
           <Share />

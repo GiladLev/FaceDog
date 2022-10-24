@@ -1,28 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import {
   Grid,
-  makeStyles,
   Card,
   CardContent,
-  MenuItem,
-  InputLabel,
-  Select,
   CardActions,
   Button,
   CardHeader,
-  FormControl,
-  Typography,
 } from "@mui/material";
-import "./register.css"
+import "./Login.css"
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { TextField } from "formik-material-ui";
-import { Box, Stack } from "@mui/system";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { addUsers } from "../pizzaSlice";
+
 
 //Data
 const initialValues = {
@@ -51,8 +40,7 @@ const lengthRegEx = /(?=.{6,})/;
 
 //validation schema
 let validationSchema = Yup.object().shape({
-  firstName: Yup.string().required("Required"),
-  lastName: Yup.string().required("Required"),
+ 
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
     .matches(
@@ -67,61 +55,24 @@ let validationSchema = Yup.object().shape({
     .matches(lengthRegEx, "Must contain 6 characters!")
     .required("Required!"),
 });
-const Register = () => {
+const Login = () => {
   
-  const [todos, setTodos] = useState([])
-  const [error, setError] = useState(false)
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const getUser = () => {
-    axios
-    .get('/apiLogin/login')
-    .then((res) => {
-      if (res.data) {
-        console.log(res.data);
-        setTodos(res.data);
-        addUsers(res.data)
-      }
-    })
-    .catch((err) => console.log(err));
-  };
-  const onSubmit = (values) => {
-    
-    navigate("/login");
-    console.log(values);
-    const task = { action: values.email+"----?----"+values.password };
-    if (task.action && task.action.length > 0) {
-        setError(false)
-      axios
-        .post('/apiLogin/login', task)
-        .then((res) => {
-          if (res.data) {
-            getUser();
-          }
-        })
-        .catch((err) => console.log(err));
-    } else {
-      setError(true)
-    }
-  };
-  useEffect(() => {
-    getUser();
-  }, []);
+  
   return (
     <div className="wrapper">
     <Grid className="main" container justifyContent="space-between" spacing={4} >
      <Grid className="wrapperLogo" item md={6}>
       <h1 className="logo">FACEDOG</h1>
-      <p className="desc">Connect to be updated on dogs in the area that are looking for a warm home</p>
+      <p className="desc">Login and connect all dogs to track all the dog in the area</p>
       </Grid>
        <Grid item md={6}>
         
         <Card>
-          <CardHeader title="REGISTER FORM"></CardHeader>
+          <CardHeader title="Login"></CardHeader>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={onSubmit}
+            // onSubmit={onSubmit}
           >
             {({ dirty, isValid, values, handleChange, handleBlur }) => {
               return (
@@ -129,40 +80,8 @@ const Register = () => {
                   <CardContent>
                     
                     <Grid item container spacing={1} justify="center">
-                      
-                      <Grid item xs={12} sm={6} md={6}>
-                        <Field
-                          label="First Name"
-                          variant="outlined"
-                          fullWidth
-                          name="firstName"
-                          value={values.firstName}
-                          component={TextField}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={6}>
-                        <Field
-                          label="Last Name"
-                          variant="outlined"
-                          fullWidth
-                          name="lastName"
-                          value={values.lastName}
-                          component={TextField}
-                        />
-                      </Grid>
-
-                      <Grid item xs={12} sm={6} md={6}>
-                        <Field
-                          label="City"
-                          variant="outlined"
-                          fullWidth
-                          name="city"
-                          value={values.city}
-                          component={TextField}
-                        />
-                      </Grid>
-
-                      <Grid item xs={12} sm={6} md={6}>
+                   
+                      <Grid item xs={12} sm={12} md={12}>
                         <Field
                           label="Email"
                           variant="outlined"
@@ -193,6 +112,7 @@ const Register = () => {
                       color="primary"
                       type="Submit"
                       fullWidth
+                    //   onClick={()=>onSubmit(values)}
                     >
                       REGISTER
                       </Button >
@@ -210,4 +130,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

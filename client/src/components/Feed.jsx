@@ -1,13 +1,22 @@
 import { Box, Stack, Skeleton } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { publicRequest } from "../requestMethods";
 import Post from "./Post";
 
 const Feed = () => {
   const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState([]);
 
-  setTimeout(() => {
-    setLoading(false);
-  }, [3000]);
+  useEffect(() => {
+    const fetchPosts = async() =>{
+      const res = await publicRequest.get("posts/timeline/63552ca4f832c86ebc8f237c")
+      setPosts(res.data);
+      console.log(posts);
+      setLoading(false)
+    }
+    fetchPosts()
+  }, [])
+  
 
   return (
     <Box flex={4} p={{ xs: 0, md: 2 }}>
@@ -20,12 +29,11 @@ const Feed = () => {
         </Stack>
       ) : (
         <>
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+          {posts.map((p)=>{
+            return(
+            <Post key={p._id} post={p}/>
+            )
+          })}
         </>
       )}
     </Box>

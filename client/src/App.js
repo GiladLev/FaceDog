@@ -1,32 +1,24 @@
-import Sidebar from "./components/Sidebar";
-import Feed from "./components/Feed";
-import Rightbar from "./components/Rightbar";
-import { Box, createTheme, Stack, ThemeProvider } from "@mui/material";
-import Navbar from "./components/Navbar";
-import Add from "./components/Add";
-import { useState } from "react";
+import { Box } from "@mui/system";
+import React from "react";
+import "./app.css";
+import Home from "./pages/home/Home";
 
-function App() {
-  const [mode, setMode] = useState("light");
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import Register from "./pages/register/Register";
+import Login from "./pages/login/Login";
+import Profile from "./pages/profile/Profile";
 
-  const darkTheme = createTheme({
-    palette: {
-      mode: mode,
-    },
-  });
+const App = () => {
+  const user = true;
   return (
-    <ThemeProvider theme={darkTheme}>
-      <Box bgcolor={"background.default"} color={"text.primary"}>
-        <Navbar />
-        <Stack direction="row" spacing={2} justifyContent="space-between">
-        <Sidebar setMode={setMode} mode={mode}/>
-          <Feed />
-          <Rightbar />
-        </Stack>
-        <Add />
-      </Box>
-    </ThemeProvider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={user ? <Home /> : <Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </Router>
   );
-}
-
+};
 export default App;
