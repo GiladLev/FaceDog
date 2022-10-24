@@ -10,20 +10,32 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import { publicRequest } from "../requestMethods";
 import {format} from "timeago.js"
 import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { publicRequest } from "../requestMethods";
+import { AuthContext } from "../context/AuthContext";
 
 const Post = ({post}) => {
-
+  const {user} = useContext(AuthContext)
+  const [likes, setLikes] = useState(post.likes.length)
+  const [isLiked, setIsLiked] = useState(false);
   useEffect(() => {
-    const fetchUser = async() =>{
-      const res = await publicRequest.get(`users/${post.userId}`)
-      console.log(res.data);
-    }
-    fetchUser()
-  }, [post.userId])
+    // render likes state
+    setIsLiked(post.likes.includes(user._id));
+  }, [post.likes]);
+  useEffect(() => {
+    // render likes state
+    console.log(likes);
+  }, [likes, isLiked]);
+  const  likeHandler = async()=>{
+    try {
+      const res = await publicRequest.put(`posts/like/${post._id}`, {"userId": user._id})
+      console.log(res.data.likes);
+      setLikes(res.data.likes.length)
+      setIsLiked(!isLiked);
+    } catch (error) { }
+  }
   return (
     <Card sx={{ margin: 5 }}>
       <Link >
@@ -55,13 +67,14 @@ const Post = ({post}) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" onClick={likeHandler}>
           <Checkbox
             icon={<FavoriteBorder />}
+            checked={isLiked}
             checkedIcon={<Favorite sx={{ color: "red" }} />}
           />
           <Typography>
-            {post.likes.length}
+            {likes}
           </Typography>
         </IconButton>
         <IconButton aria-label="share">

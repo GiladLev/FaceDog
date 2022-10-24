@@ -10,10 +10,11 @@ import Profile from "./pages/profile/Profile";
 import { AuthContext } from "./context/AuthContext";
 
 const App = () => {
-  const {user} = useContext(AuthContext);
+  const user =JSON.parse(localStorage?.getItem('user'))
   return (
     <Router>
       <Routes>
+        {console.log(user)}
         <Route path="/" element={user ? <Home /> : <Login />} />
         <Route path="/login" element={user ? <Home /> : <Login />} />
         <Route path="/register" element={user ? <Home /> : <Register /> } />
