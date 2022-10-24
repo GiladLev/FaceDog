@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
 import {format} from "timeago.js"
+import { Link } from "react-router-dom";
 
 const Post = ({post}) => {
 
@@ -25,6 +26,7 @@ const Post = ({post}) => {
   }, [post.userId])
   return (
     <Card sx={{ margin: 5 }}>
+      <Link >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: "red" }} aria-label="recipe">
@@ -39,6 +41,8 @@ const Post = ({post}) => {
         title="John Doe"
         subheader={format(post.createdAt)}
       />
+      </Link>
+      
       <CardMedia
         component="img"
         height="20%"

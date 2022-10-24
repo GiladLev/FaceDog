@@ -48,6 +48,14 @@ const UserSchema = new mongoose.Schema(
       type: String,
       max: 50,
     },
+    firstName: {
+      type: String,
+      max: 50,
+    },
+    lastName: {
+      type: String,
+      max: 50,
+    },
     from: {
       type: String,
       max: 50,
