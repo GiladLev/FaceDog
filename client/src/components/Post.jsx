@@ -17,9 +17,11 @@ import { publicRequest } from "../requestMethods";
 import { AuthContext } from "../context/AuthContext";
 
 const Post = ({post}) => {
-  const {user} = useContext(AuthContext)
+
   const [likes, setLikes] = useState(post.likes.length)
   const [isLiked, setIsLiked] = useState(false);
+  const [user, setUser] = useState({});
+  
   useEffect(() => {
     // render likes state
     setIsLiked(post.likes.includes(user._id));
@@ -28,6 +30,13 @@ const Post = ({post}) => {
     // render likes state
     console.log(likes);
   }, [likes, isLiked]);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await publicRequest.get(`/users/${post.userId}`);
+      setUser(res.data);
+    };
+    fetchUser();
+  }, [post.userId]);
   const  likeHandler = async()=>{
     try {
       const res = await publicRequest.put(`posts/like/${post._id}`, {"userId": user._id})
@@ -38,7 +47,7 @@ const Post = ({post}) => {
   }
   return (
     <Card sx={{ margin: 5 }}>
-      <Link >
+
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: "red" }} aria-label="recipe">
@@ -50,10 +59,10 @@ const Post = ({post}) => {
             <MoreVert />
           </IconButton>
         }
-        title="John Doe"
+        title={user.username}
         subheader={format(post.createdAt)}
       />
-      </Link>
+
       
       <CardMedia
         component="img"
